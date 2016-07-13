@@ -1,0 +1,97 @@
+<title>SDN / OpenFlow | Flowgrammable</title>
+<body>
+<h1>OpenFlow</h1>
+<h3>Overview</h3>
+<p>OpenFlow, an instance of the SDN architecture, is a set of specifications maintained by the Open Networking Forum. At the core of the specifications is a definition of an abstract packet processing machine, called a switch. The switch processes packets using a combination of packet contents and switch configuration state. A protocol is defined for manipulating the switch's configuration state as well as receiving certain switch events. Finally, a controller is an element that speaks the protocol to manage the configuration state of many switches and respond to events.</p>
+<ul class="nav nav-tabs">
+<li class="active">Protocol</li>
+<li>Switch</li>
+<li>Controller</li>
+<li>Application</li>
+</ul>
+<h3>Protocol Decomposition</h3>
+<p>The OpenFlow protocol can be broken into four components: message layer, state machine, system interface, and configuration. The image and table below illustrate these components, their interaction, and describe their function at a high level.</p>
+<table border="0" class="table text-centered table-striped">
+<tbody>
+<tr>
+<td><strong>Component</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>Message Layer</td>
+<td>The message layer is the core of the protocol stack. It defines valid structure and semantics for all messages. A typical message layer supports the ability to construct, copy, compare, print, and manipulate messages.</td>
+</tr>
+<tr>
+<td>State Machine</td>
+<td>The state machine defines the core low-level behavior of the protocol. Typically, it is used to describe actions such as: negotiation, capability discover, flow control, delivery, etc.</td>
+</tr>
+<tr>
+<td>System Interface</td>
+<td>The system interface defines how the protocol interacts with the outside world. It typically identifies necessary and optional interfaces along with their intended use, such as TLS and TCP as transport channels.</td>
+</tr>
+<tr>
+<td>Configuration</td>
+<td>Almost all aspects of the protocol have configurations or initial values. Configuration can cover anything from default buffer sizes and reply intervals to X.509 certificates.</td>
+</tr>
+<tr>
+<td>Data Model</td>
+<td>Another way to consider the OpenFlow protocol is to understand its underlying data model. Each switch maintains a relational data model that contains the attributes for each OpenFlow abstraction. These attributes either describe an abstractions capability, its configuration state, or some set of current statistics.</td>
+</tr>
+</tbody>
+</table>
+<h3>Switch Anatomy</h3>
+<p>An OpenFlow switch can be broken into two components: the switch-agent and the data plane. The switch-agent speaks the OpenFlow protocol to one or more controllers. Additionally, it communicates with the data plane using the requisite internal protocol. The switch-agent will translate commands from the controller into the necessary low-level instructions to send to the data plane, and internal data plane notifications to the appropriate OpenFlow messages and forward to the controller. The data plane performs all packet forwarding and manipulation; however, based on its configuration sometimes it will send packets to the switch-agent for further handling.</p>
+<h3>Switch Agent</h3>
+<table class="table table-striped">
+<tbody>
+<tr>
+<td><strong>Component</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>OpenFlow Protocol</td>
+<td>This is the switch side instance of the OpenFlow protocol.</td>
+</tr>
+<tr>
+<td>Core Logic</td>
+<td>This component manages the switch, executes commands against the data plane as necessary, manages the data plane offload, etc.</td>
+</tr>
+<tr>
+<td>Data Plane Offload</td>
+<td>Often the control plane will offload some functionality present in OpenFlow but not provided by the existing data plane implementation.</td>
+</tr>
+<tr>
+<td>Data Plane Protocol</td>
+<td>This is an internal protocol used to configue the data plane state.</td>
+</tr>
+</tbody>
+</table>
+<h3>Data Plane</h3>
+<p>The data plane of a switch is composed of only a few things: ports, flow tables, flows, classifiers, and actions. Packets arrive and leave the system on ports. Packets are matched to flows in flow tables using classifiers. Flows contain sets of actions which are applied to each packet that it matches.</p>
+<table class="table table-striped">
+<tbody>
+<tr>
+<td><strong>Component</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>Ports</td>
+<td>Packets arrive and leave a switch on a port. Different versions of the protocol support different types of ports, properties, and configurations.</td>
+</tr>
+<tr>
+<td>Classifiers</td>
+<td>A classifier matches a packet to a flow entry in a flow table.</td>
+</tr>
+<tr>
+<td>Instructions and Actions</td>
+<td>Instructions and actions govern how a packet is processed once it matches a flow entry in a flow table.</td>
+</tr>
+</tbody>
+</table>
+<h4>Data Plane - Packet Lifecycle</h4>
+<p>Each packet experiences the same behavior as it traveses the switch data plane. When a packet arrives a key is built that contains both information from the packet, such as the values of certain protocol fields, as well as metadata collected about the packet, such as arrival port, arrival time, etc. The key is used to select a particular flow in a flow table and its associated actions are applied to the packet. An action set can drop, mutate, queue, forward, or direct that packet to a new flow table.</p>
+<h3>Controller Topology</h3>
+<h3>Event Handling</h3>
+<h4>About us</h4>
+<p>Flowgrammable is a non-profit, all volunteer team, composed of engineers, researchers, and students; dedicated to increasing the adoption of Software Defined Networking.</p>
+</body>

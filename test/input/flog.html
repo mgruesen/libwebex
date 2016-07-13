@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width">
+<meta name="keywords" content="">
+<meta name="description" content="Overview OpenFlow, an instance of the SDN architecture, is a set of specifications maintained by the Open Networking Forum (ONF). At the core of the specifications is a definition of an abstract packet processing machine, called a switch. The switch processes packets using a combination of packet contents and switch configuration state. A protocol is defined for manipulating the switch&#39;s configuration state as well as receiving certain switch events. Finally, a controller is an element that speaks the protocol to manage the configuration state of many switches and respond to events. ">
+<title>SDN / OpenFlow | Flowgrammable</title>
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/ico/apple-touch-icon-144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/ico/apple-touch-icon-114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/ico/apple-touch-icon-72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="/static/ico/apple-touch-icon-57-precomposed.png">
+<link rel="shortcut icon" href="/static/ico/favicon.png">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="/blog/feeds/rss/">
+<link rel="alternate" type="application/atom+xml" title="Atom" href="/blog/feeds/atom/">
+<link rel="stylesheet" href="/static/CACHE/css/cdfef6f00f11.css" type="text/css"/><link rel="stylesheet" href="/static/CACHE/css/2da89d632665.css" type="text/css" media="screen"/><link rel="stylesheet" href="/static/CACHE/css/10fb6bc445e7.css" type="text/css"/>
+<link href='http://fonts.googleapis.com/css?family=Playball' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="/static/CACHE/js/2df9736b4e32.js"></script>
+ 
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+</head>
+<!--[if lt IE 7 ]> <body class="ie ie6"> <![endif]-->
+<!--[if IE 7 ]> <body class="ie ie7 "> <![endif]-->
+<!--[if IE 8 ]> <body class="ie ie8 "> <![endif]-->
+<!--[if IE 9 ]> <body class="ie ie9 "> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!-->
+<body id="body" class="">
+<!--<![endif]-->
+<div class="navbar">
+<div class="container">
+<div class="navbar-header">
+<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+<i class="fa fa-align-justify"></i>
+</button>
+<a class="navbar-brand" href="/">
+<img style="Max-height: 50px;" src="/static/images/logo_w_t.png" alt="Flowgrammable">
+</a>
+</div>
+<div class="navbar-collapse collapse">
+<ul class="nav navbar-nav"><li class="" id="dropdown-menu--"><a href="/">
+Home
+</a></li><li class="dropdown" id="dropdown-menu-about"><a href="/about/">
+About
+<span class="caret"></span></a><ul class="dropdown-menu"><li id="dropdown-menu-about-about-1"><a href="/about/about-1/">Overview</a></li><li id="dropdown-menu-about-team"><a href="/about/team/">Team</a></li><li id="dropdown-menu-about-calendar"><a href="/about/calendar/">Calendar</a></li></ul></li><li class="dropdown active" id="dropdown-menu-sdn"><a href="/sdn/">
+SDN
+<span class="caret"></span></a><ul class="dropdown-menu"><li class="active" id="dropdown-menu-sdn-openflow"><a href="/sdn/openflow/">OpenFlow</a></li><li id="dropdown-menu-sdn-flowgrammable-stack"><a href="/sdn/flowgrammable-stack/">Flowgrammable Stack</a></li><li id="dropdown-menu-sdn-research"><a href="/sdn/research/">Research</a></li><li id="dropdown-menu-sdn-ecosystem"><a href="/sdn/ecosystem/">Ecosystem</a></li></ul></li><li class="dropdown" id="dropdown-menu-getting-started"><a href="/getting-started/">
+Projects
+<span class="caret"></span></a><ul class="dropdown-menu"><li id="dropdown-menu-getting-started-freeflow-stack"><a href="/getting-started/freeflow-stack/">Freeflow</a></li><li id="dropdown-menu-getting-started-flowsim"><a href="/getting-started/flowsim/">Flowsim</a></li><li id="dropdown-menu-getting-started-sdn-knowledge-base"><a href="/getting-started/sdn-knowledge-base/">Knowledge Base</a></li><li id="dropdown-menu-getting-started-development-appliance"><a href="/getting-started/development-appliance/">Development Appliance</a></li><li id="dropdown-menu-http:--github.com-flowgrammable"><a href="http://github.com/flowgrammable">Github</a></li><li id="dropdown-menu-gsoc-projects"><a href="/gsoc/projects/">GSoC Projects</a></li><li id="dropdown-menu-getting-started-onf-driver-contest-submission"><a href="/getting-started/onf-driver-contest-submission/">ONF Driver Contest Submission</a></li></ul></li><li class="" id="dropdown-menu-blog"><a href="/blog/">
+Blog
+</a></li><li id="search"><a href="#" id="search-btn"><i class="fa fa-search"></i></a><div id="search-box" class="search-box"><form action="/search/" role="search" class="input-group"><input id="search-input" type="text" name="q" placeholder="Search" class="form-control"><span class="input-group-btn"><input type="submit" class="btn" value="Go!"/></span></form></div></li></ul>
+</div> 
+</div>
+</div>
+<div class="content">
+<div class="container">
+<div class="row">
+<div class="col-md-12">
+<h1>
+OpenFlow
+</h1>
+<ol class="breadcrumb">
+<li id="breadcrumb-menu-home">
+<a href="/">Home</a>
+</li>
+<li id="breadcrumb-menu-sdn">
+<a href="/sdn/">SDN</a>
+</li>
+<li id="breadcrumb-menu-sdn-openflow" class="active">OpenFlow</li>
+</ol>
+<h3>Overview</h3>
+<p><a href="https://www.opennetworking.org/sdn-resources/onf-specifications/openflow" target="_blank">OpenFlow</a>, an instance of the SDN architecture, is a set of specifications maintained by the Open Networking Forum (<a href="https://www.opennetworking.org/" target="_blank">ONF</a>). At the core of the specifications is a definition of an abstract packet processing machine, called a switch. The switch processes packets using a combination of packet contents and switch configuration state. A protocol is defined for manipulating the switch's configuration state as well as receiving certain switch events. Finally, a controller is an element that speaks the protocol to manage the configuration state of many switches and respond to events.&nbsp;</p>
+<p><img src="/static/media/uploads/components/topo.png" width="385" height="267"/></p>
+ 
+<ul class="nav nav-tabs">
+<li class="active"><a href="#protocol" data-toggle="tab">Protocol</a></li>
+<li><a href="#switch" data-toggle="tab">Switch</a></li>
+<li><a href="#controller" data-toggle="tab">Controller</a></li>
+<li><a href="#application" data-toggle="tab">Application</a></li>
+</ul>
+ 
+<div class="tab-content">
+<div class="tab-pane active" id="protocol">
+<h3>Protocol Decomposition</h3>
+The OpenFlow protocol can be broken into four components: message layer, state machine, system interface, and configuration. The image and table below illustrate these components, their interaction, and describe their function at a high level.
+<p></p>
+<div class="row">
+<div class="col-md-3"><img src="/static/media/uploads/components/protocol.png" width="217" height="241"/></div>
+<div class="col-md-9">
+<table border="0" class="table text-centered table-striped">
+<tbody>
+<tr>
+<td><strong>Component</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td><a href="/sdn/openflow/message-layer">Message Layer</a></td>
+<td>The message layer is the core of the protocol stack. It defines valid structure and semantics for all messages. A typical message layer supports the ability to construct, copy, compare, print, and manipulate messages.</td>
+</tr>
+<tr>
+<td><a href="/sdn/openflow/state-machine/">State Machine</a></td>
+<td>The state machine defines the core low-level behavior of the protocol. Typically, it is used to describe actions such as: negotiation, capability discover, flow control, delivery, etc.</td>
+</tr>
+<tr>
+<td><a href="/sdn/openflow/system-interface">System Interface</a></td>
+<td>The system interface defines how the protocol interacts with the outside world. It typically identifies necessary and optional interfaces along with their intended use, such as TLS and TCP as transport channels.</td>
+</tr>
+<tr>
+<td><a href="/sdn/openflow/configuration">Configuration</a></td>
+<td>Almost all aspects of the protocol have configurations or initial values. Configuration can cover anything from default buffer sizes and reply intervals to X.509 certificates.</td>
+</tr>
+<tr>
+<td><a href="/sdn/openflow/data-model">Data Model</a></td>
+<td>Another way to consider the OpenFlow protocol is to understand its underlying data model. Each switch maintains a relational data model that contains the attributes for each OpenFlow abstraction. These attributes either describe an abstractions capability, its configuration state, or some set of current statistics.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="tab-pane" id="switch">
+<h3>Switch Anatomy</h3>
+<img src="/static/media/uploads/components/switch_anatomy.png" width="335" height="209" style="float: left;"/>An OpenFlow switch can be broken into two components: the switch-agent and the data plane. The switch-agent speaks the OpenFlow protocol to one or more controllers. Additionally, it communicates with the data plane using the requisite internal protocol. The switch-agent will translate commands from the controller into the necessary low-level instructions to send to the data plane, and internal data plane notifications to the appropriate OpenFlow messages and forward to the controller. The data plane performs all packet forwarding and manipulation; however, based on its configuration sometimes it will send packets to the switch-agent for further handling. <br/>
+<h3>Switch Agent</h3>
+<div class="row">
+<div class="col-md-4"><img src="/static/media/uploads/components/switch_agent_anatomy.png" width="385" height="166"/></div>
+<div class="col-md-8">
+<table class="table table-striped">
+<tbody>
+<tr>
+<td><strong>Component</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>OpenFlow Protocol</td>
+<td>This is the switch side instance of the OpenFlow protocol.</td>
+</tr>
+<tr>
+<td>Core Logic</td>
+<td>This component manages the switch, executes commands against the data plane as necessary, manages the data plane offload, etc.</td>
+</tr>
+<tr>
+<td>Data Plane Offload</td>
+<td>Often the control plane will offload some functionality present in OpenFlow but not provided by the existing data plane implementation.</td>
+</tr>
+<tr>
+<td>Data Plane Protocol</td>
+<td>This is an internal protocol used to configue the data plane state.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h3>Data Plane</h3>
+The data plane of a switch is composed of only a few things: ports, flow tables, flows, classifiers, and actions. Packets arrive and leave the system on ports. Packets are matched to flows in flow tables using classifiers. Flows contain sets of actions which are applied to each packet that it matches.
+<div class="row">
+<div class="col-md-6"><img src="/static/media/uploads/components/switch.png" width="459" height="216"/></div>
+<div class="col-md-6">
+<table class="table table-striped">
+<tbody>
+<tr>
+<td><strong>Component</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td><a href="/sdn/openflow/ports/">Ports</a></td>
+<td>Packets arrive and leave a switch on a port. Different versions of the protocol support different types of ports, properties, and configurations.&nbsp;</td>
+</tr>
+<tr>
+<td><a href="/sdn/openflow/classifiers/">Classifiers</a></td>
+<td>
+<p>A classifier matches a packet to a flow entry in a flow table.</p>
+</td>
+</tr>
+<tr>
+<td><a href="/sdn/openflow/actions/">Instructions &amp; Actions</a></td>
+<td>
+<p>Instructions and actions govern how a packet is processed once it matches a flow entry in a flow table.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<h4>Data Plane - Packet Lifecycle</h4>
+Each packet experiences the same behavior as it traveses the switch data plane. When a packet arrives a key is built that contains both information from the packet, such as the values of certain protocol fields, as well as metadata collected about the packet, such as arrival port, arrival time, etc. The key is used to select a particular flow in a flow table and its associated actions are applied to the packet. An action set can drop, mutate, queue, forward, or direct that packet to a new flow table.<br/> <img src="/static/media/uploads/components/packet_lifecycle.png" width="710" height="138"/>
+<p></p>
+<table border="0" class="table table-striped">
+<tbody>
+<tr>
+<td><strong>Step</strong></td>
+<td><strong>Name</strong></td>
+<td><strong>Description</strong></td>
+</tr>
+<tr>
+<td>1.</td>
+<td>Packet Arrival</td>
+<td>Packets arrive on ports, these can be physical or virtual. It is important to remember information about arrival ports for source-based processing later in the pipeline.</td>
+</tr>
+<tr>
+<td>2.</td>
+<td>Key Extraction</td>
+<td>Each packet has a small portion of meta data built, called the key, after arrival. The key includes several fields from within the packet as well as side information suck as: location of the buffered packet, header values, arrival port, arrival clock, etc. The key is what is fed to the rest of the pipeline.</td>
+</tr>
+<tr>
+<td>3.</td>
+<td>
+<p>Table Selection</p>
+</td>
+<td>The key is used to search a table; however, multiple tables may be present. In this case a table must first be selected. When a packet goes thorugh the pipeline for the first time the first table is selected by default; subsequent tables may be selected through actions or table misses.</td>
+</tr>
+<tr>
+<td>4.</td>
+<td>Flow Selection</td>
+<td>The key is used to select a particular flow in a table. The first flow of a table where the classifier subsumes the key becomes the selected flow.</td>
+</tr>
+<tr>
+<td>5.</td>
+<td>Action Application</td>
+<td>Each row contains a set of actions to apply to all subsumed packets. When a flow is selected its actions are applied to the corresponding packet. Actions may modify the packets state and/or affect treatment of the packet.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="tab-pane" id="controller">
+<h3>Controller Topology</h3>
+<img src="/static/media/uploads/components/controllers.png" width="316" height="214"/>
+<p></p>
+<div class="panel panel-info">
+<div class="panel-heading">Under development</div>
+<div class="panel-body">This section is under active development.</div>
+</div>
+</div>
+<div class="tab-pane" id="application">
+<h3>Event Handling</h3>
+<img src="/static/media/uploads/components/app_events.png" width="178" height="174"/>
+<p></p>
+<div class="panel panel-info">
+<div class="panel-heading">Under development</div>
+<div class="panel-body">This section is under active development.</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="footer-spacer"></div>
+<footer>
+<div class="container">
+<div class="row">
+<div class="col-md-4">
+<h4>About us</h4>
+<p>Flowgrammable is a non-profit, all volunteer team, composed of engineers, researchers, and students; dedicated to increasing the adoption of Software Defined Networking.</p>
+</div>
+<div class="col-md-2">
+<h4>Useful links</h4>
+<ul class="list-unstyled">
+<li><a href="/about/">About</a></li><li><a href="/about/calendar/">Calendar</a></li><li><a href="/sdn/openflow/">OpenFlow</a></li><li><a href="/sdn/openflow/data-model/">Data Model</a></li><li><a href="/sdn/openflow/message-layer/">Message Layer</a></li><li><a href="/getting-started/">Projects</a></li><li><a href="/getting-started/sdn-knowledge-base/">Knowledge Base</a></li><li><a href="http://github.com/flowgrammable">Github</a></li><li><a href="/gsoc/projects/">GSoC Projects</a></li>
+</ul>
+</div>
+<div class="col-md-3">
+<h4>Follow us on Twitter</h4>
+<a data-chrome="transparent" class="twitter-timeline" href="https://twitter.com/Flowgrammable" data-widget-id="418557704039194624">Tweets by @Flowgrammable</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</div>
+<div class="col-md-3">
+<h4>From the Blog</h4>
+<ul class="list-unstyled">
+<li><a href="/blog/flowgrammable-selected-as-organizational-mentor-for-google-summer-of-code-2014/">Flowgrammable is mentor organization for Google Summer of Code 2014</a></li>
+<li><a href="/blog/what-is-flowgrammable/">How did Flowgrammable get started?</a></li>
+<li><a href="/blog/flowgrammable-named-finalist-in-onf-openflow-driver-competition/">Flowgrammable named Finalist in ONF OpenFlow Driver Competition</a></li>
+</ul>
+</div>
+</div>
+<div class="bottom-footer">
+<p class="pull-right" style="line-height: 3em; font-size: .7em; margin-bottom: 0em;">&copy; Flowgrammable 2016 | Made with <a href="http://mezzathe.me" target="_blank">MEZZaTHEME</a></p>
+<div class="social">
+<a target="_blank" href="https://facebook.com/flowgrammable"><i class="fa fa-facebook"></i></a>
+<a target="_blank" href="https://twitter.com/flowgrammable"><i class="fa fa-twitter"></i></a>
+<a target="_blank" href="https://google.com/+Flowgrammable"><i class="fa fa-google-plus"></i></a>
+<a target="_blank" href="/cdn-cgi/l/email-protection#40292e262f00262c2f372732212d2d21222c256e232f2d"><i class="fa fa-envelope"></i></a>
+</div>
+</div>
+</div>
+</footer>
+</div> 
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46529012-1', 'flowgrammable.org');
+  ga('send', 'pageview');
+
+</script>
+<script type="text/javascript">/* <![CDATA[ */(function(d,s,a,i,j,r,l,m,t){try{l=d.getElementsByTagName('a');t=d.createElement('textarea');for(i=0;l.length-i;i++){try{a=l[i].href;s=a.indexOf('/cdn-cgi/l/email-protection');m=a.length;if(a&&s>-1&&m>28){j=28+s;s='';if(j<m){r='0x'+a.substr(j,2)|0;for(j+=2;j<m&&a.charAt(j)!='X';j+=2)s+='%'+('0'+('0x'+a.substr(j,2)^r).toString(16)).slice(-2);j++;s=decodeURIComponent(s)+a.substr(j,m-j)}t.innerHTML=s.replace(/</g,'&lt;').replace(/>/g,'&gt;');l[i].href='mailto:'+t.value}}catch(e){}}}catch(e){}})(document);/* ]]> */</script></body>
+</html>
