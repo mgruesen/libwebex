@@ -9,26 +9,22 @@ else
   cd build
 fi
 
-# Create 'debug' and 'release' build folders
-mkdir debug release
+if [ "$1" = "" ]; then
+  build_type="Debug"
+  echo "Building 'debug' mode..."
+elif [ "$1" = "--release" ]; then
+  build_type="Release"
+  echo "Building 'release' mode..."
+else 
+  exit 1
+fi
 
-# Configure and make 'debug' build
-cd debug
-echo "Building 'debug'..."
-cmake -DCMAKE_BUILD_TYPE=Debug ../..
+# Configure and make 
+cmake -DCMAKE_BUILD_TYPE=$build_type ..
 make
 if [ $? -ne "0" ]; then
   exit 1
 fi
-cd ..
 
-# Configure and make 'release' build
-cd release
-echo "Building 'release'..."
-cmake -DCMAKE_BUILD_TYPE=Release ../..
-make
-if [ $? -ne "0" ]; then
-  exit 1
-fi
-cd ..
 echo "Build completed"
+
